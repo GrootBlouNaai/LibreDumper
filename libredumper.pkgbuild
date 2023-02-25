@@ -1,17 +1,23 @@
-pkgname=libre-dumper
+pkgname=depot-downloader
 pkgver=1.0.0
 pkgrel=1
-pkgdesc="A Neutralino.js GUI for LibreDumper"
+pkgdesc="A Neutralino.js GUI for DepotDownloader"
 arch=('x86_64')
-url="https://github.com/GrootBlouNaai/LibreDumper"
-license=('GPLv2')
+url="https://github.com/username/depot-downloader"
+license=('MIT')
 depends=('neutralino')
-makedepends=('git')
-source=("git+${url}.git")
+makedepends=('git' 'gcc')
+source=("depot-downloader::git+https://github.com/GrootBlouNaai/LibreDumper.git#commit=<commit-id>")
 sha256sums=('SKIP')
 
+build() {
+  cd "$srcdir/$pkgname"
+  gcc -o depot-downloader depot-downloader.c
+}
+
 package() {
-    cd "${srcdir}/LibreDumper"
-    neutralino-release
-    cp -r ./build/linux-x64/* "${pkgdir}/usr/share/neutralino/app"
+  cd "$srcdir/$pkgname"
+  mkdir -p "$pkgdir/usr/share/neutralino/app"
+  cp -r ./* "$pkgdir/usr/share/neutralino/app"
+  install -Dm755 depot-downloader "$pkgdir/usr/share/neutralino/app/depot-downloader"
 }
