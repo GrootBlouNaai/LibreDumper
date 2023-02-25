@@ -4,8 +4,5 @@
   "description": "A Neutralino.js GUI for DepotDownloader",
   "scripts": {
     "start": "neutralino start"
-  },
-  "dependencies": {
-    "neutralino": "^2.5.0"
   }
 }
