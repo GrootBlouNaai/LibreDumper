@@ -1,0 +1,17 @@
+pkgname=libre-dumper
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="A Neutralino.js GUI for LibreDumper"
+arch=('x86_64')
+url="https://github.com/GrootBlouNaai/LibreDumper"
+license=('GPLv2')
+depends=('neutralino')
+makedepends=('git')
+source=("git+${url}.git")
+sha256sums=('SKIP')
+
+package() {
+    cd "${srcdir}/LibreDumper"
+    neutralino-release
+    cp -r ./build/linux-x64/* "${pkgdir}/usr/share/neutralino/app"
+}
