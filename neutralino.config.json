@@ -1,6 +1,10 @@
 {
   "appname": "DepotDownloader",
-  "appport": 5000,
   "mode": "window",
-  "url": "index.html"
+  "url": "index.html",
+  "window": {
+    "title": "DepotDownloader",
+    "width": 800,
+    "height": 600
+  }
 }
