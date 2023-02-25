@@ -54,6 +54,13 @@
       <div id="output"></div>
     </div>
 
-    <script src="src/index.js"></script>
+    <script>
+      Neutralino.init({
+        load: function() {
+          console.log("Neutralino initialized.");
+          // Add your code here to interact with Neutralino APIs
+        }
+      });
+    </script>
   </body>
 </html>
