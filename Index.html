@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DepotDownloader</title>
+    <script src="neutralino.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>DepotDownloader</h1>
+      <form id="download-form">
+        <div>
+          <label for="app-id">App ID:</label>
+          <input type="text" id="app-id" name="app-id" required>
+        </div>
+
+        <div>
+          <label for="depot-id">Depot ID:</label>
+          <input type="text" id="depot-id" name="depot-id" required>
+        </div>
+
+        <div>
+          <label for="manifest-id">Manifest ID:</label>
+          <input type="text" id="manifest-id" name="manifest-id" required>
+        </div>
+
+        <div>
+          <label for="username">Steam Username:</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+
+        <div>
+          <label for="password">Steam Password:</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+
+        <div>
+          <label>Platforms:</label>
+          <br>
+          <input type="checkbox" id="windows" name="platform" value="windows">
+          <label for="windows">Windows</label>
+
+          <input type="checkbox" id="macos" name="platform" value="macos">
+          <label for="macos">macOS</label>
+
+          <input type="checkbox" id="linux" name="platform" value="linux">
+          <label for="linux">Linux</label>
+        </div>
+
+        <div>
+          <button type="submit">Download</button>
+        </div>
+      </form>
+      <div id="output"></div>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
