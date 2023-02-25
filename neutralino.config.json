@@ -1,0 +1,6 @@
+{
+  "appname": "DepotDownloader",
+  "appport": 5000,
+  "mode": "window",
+  "url": "index.html"
+}
