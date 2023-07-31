@@ -1,4 +1,4 @@
-# LibreDumper
+# LibreDumper (WIP)
 Download all your steam games without the disgusting closed source client
 
 ## How to build
