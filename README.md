@@ -1,5 +1,5 @@
 # LibreDumper (WIP)
-Download all your steam games without the disgusting closed source client
+Download all your steam games without the disgusting closed source client (Frontend for DepotDownloader)
 
 ## How to build
 makepkg libredumper.phgbuild
