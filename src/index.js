@@ -1,8 +1,11 @@
 const { execCommand } = require("@neutralinojs/neu");
+
 const form = document.querySelector('#download-form');
 const output = document.querySelector('#output');
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', handleFormSubmit);
+
+function handleFormSubmit(e) {
   e.preventDefault();
 
   const appId = document.querySelector('#app-id').value;
@@ -10,15 +13,26 @@ form.addEventListener('submit', (e) => {
   const manifestId = document.querySelector('#manifest-id').value;
   const username = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
-
-  const platforms = Array.from(document.querySelectorAll('input[name="platform"]:checked')).map(input => input.value);
+  const platforms = getSelectedPlatforms();
 
   if (platforms.length === 0) {
     output.innerHTML = 'Please select at least one platform.';
     return;
   }
 
-  const args = [
+  const args = buildCommandArgs(appId, depotId, manifestId, username, password, platforms);
+  const command = `./DepotDownloader ${args.join(' ')}`;
+
+  output.innerHTML = 'Downloading...';
+  executeCommand(command);
+}
+
+function getSelectedPlatforms() {
+  return Array.from(document.querySelectorAll('input[name="platform"]:checked')).map(input => input.value);
+}
+
+function buildCommandArgs(appId, depotId, manifestId, username, password, platforms) {
+  return [
     `--app-id=${appId}`,
     `--depot-id=${depotId}`,
     `--manifest-id=${manifestId}`,
@@ -26,22 +40,28 @@ form.addEventListener('submit', (e) => {
     `--password=${password}`,
     ...platforms.map(platform => `--${platform}`),
   ];
+}
 
-  const command = `./DepotDownloader ${args.join(' ')}`;
-  output.innerHTML = 'Downloading...';
-
+function executeCommand(command) {
   execCommand(command, (error, stdout, stderr) => {
     if (error) {
-      console.error(error);
-      output.innerHTML = `Error: ${error.message}`;
+      handleError(error);
       return;
     }
     if (stderr) {
-      console.error(stderr);
-      output.innerHTML = `Error: ${stderr}`;
+      handleError(stderr);
       return;
     }
-    console.log(stdout);
-    output.innerHTML = 'Download completed successfully.';
+    handleSuccess(stdout);
   });
-});
+}
+
+function handleError(errorMessage) {
+  console.error(errorMessage);
+  output.innerHTML = `Error: ${errorMessage}`;
+}
+
+function handleSuccess(stdout) {
+  console.log(stdout);
+  output.innerHTML = 'Download completed successfully.';
+}
